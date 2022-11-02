@@ -7,10 +7,10 @@ import zipfile
 import time
 
 
-DEFAULT_REPO = "ywangd"
+DEFAULT_REPO = "satogiwa"
 DEFAULT_BRANCH = "master"
 TMPDIR = os.environ.get('TMPDIR', os.environ.get('TMP'))
-URL_TEMPLATE = 'https://github.com/{}/stash/archive/{}.zip'
+URL_TEMPLATE = 'https://github.com/{}/improvedStash/archive/{}.zip'
 TEMP_ZIPFILE = os.path.join(TMPDIR, 'StaSh.zip')
 TEMP_PTI = os.path.join(TMPDIR, 'ptinstaller.py')
 URL_PTI = 'https://raw.githubusercontent.com/ywangd/pythonista-tools-installer/master/ptinstaller.py'
@@ -180,6 +180,7 @@ def pythonista_install(install_path, repo=DEFAULT_REPO, branch=DEFAULT_BRANCH, l
         zp = TEMP_ZIPFILE
         # download StaSh
         try:
+            # create Stash binary file in TEMP_ZIPFILE.
             download_stash(repo=repo, branch=branch, outpath=zp, verbose=verbose)
         except:
             raise DownloadError("Unable to download StaSh from {}:{}".format(repo, branch))
@@ -293,8 +294,9 @@ def main(defs={}):
         
     if not is_update:
         # print additional instructions
-        print('Installation completed.')
+        print('Installation completed!')
         print('Please restart Pythonista and run launch_stash.py under the home directory to start StaSh.')
+        print('This file is installed from satogiwa REPO.')
 
 
 # if __name__ == "__main__":
