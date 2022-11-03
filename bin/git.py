@@ -55,7 +55,8 @@ if not hasattr(subprocess, 'call'):
 
     subprocess.Popen = Popen
     subprocess.call = call
-GITTLE_URL = 'https://github.com/jsbain/gittle/archive/master.zip'
+# Forbid the installation of gittle because gittle can't runs on Python3.
+#GITTLE_URL = 'https://github.com/jsbain/gittle/archive/master.zip'
 FUNKY_URL = 'https://github.com/FriendCode/funky/archive/master.zip'
 DULWICH_URL = 'https://github.com/jsbain/dulwich/archive/ForStaSH_0.12.2.zip'
 REQUIRED_DULWICH_VERSION = (0, 12, 2)
@@ -128,8 +129,11 @@ if AUTODOWNLOAD_DEPENDENCIES:
             You might also try deleting any existing dulwich versions in site-packages or elsewhere, then restarting pythonista.'''
         )
 
-    #gittle, funky
-    # todo... check gittle version
+    '''gittle, funky
+    Python3 want gittle3 not gittle.
+    Gittle is not installed.
+    If you don't have gittle3, ImportError will happend.
+    You must install gittle3 through "pip install gittle3" on stash. '''
     try:
         gittle_path = os.path.join(libpath, 'gittle')
         funky_path = os.path.join(libpath, 'funky')
@@ -139,17 +143,7 @@ if AUTODOWNLOAD_DEPENDENCIES:
         import gittle
         Gittle = gittle.Gittle
     except ImportError:
-        _stash('wget {} -o $TMPDIR/gittle.zip'.format(GITTLE_URL))
-        _stash('unzip $TMPDIR/gittle.zip -d $TMPDIR/gittle')
-        _stash('mv $TMPDIR/gittle/gittle $STASH_ROOT/lib')
-        _stash('wget {} -o $TMPDIR/funky.zip'.format(FUNKY_URL))
-        _stash('unzip $TMPDIR/funky.zip -d $TMPDIR/funky')
-        _stash('mv $TMPDIR/funky/funky $STASH_ROOT/lib')
-        _stash('rm  $TMPDIR/gittle.zip')
-        _stash('rm  $TMPDIR/funky.zip')
-        _stash('rm -r $TMPDIR/gittle')
-        _stash('rm -r $TMPDIR/funky')
-        import gittle
+        print("Gittle3 is not installed.\nYou install gittle3 by pip install gittle3.")
         Gittle = gittle.Gittle
     ## end install modules
 else:
