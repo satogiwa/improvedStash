@@ -132,8 +132,7 @@ if AUTODOWNLOAD_DEPENDENCIES:
     '''gittle, funky
     Python3 want gittle3 not gittle.
     Gittle is not installed.
-    If you don't have gittle3, ImportError will happend.
-    You must install gittle3 through "pip install gittle3" on stash. '''
+    If you don't have gittle3, gittle3 will be installed automatically.'''
     try:
         gittle_path = os.path.join(libpath, 'gittle')
         funky_path = os.path.join(libpath, 'funky')
@@ -143,7 +142,10 @@ if AUTODOWNLOAD_DEPENDENCIES:
         import gittle
         Gittle = gittle.Gittle
     except ImportError:
-        print("Gittle3 is not installed.\nYou install gittle3 by pip install gittle3.")
+        if not input('Need to install gittle3.  OK to install on pip [y/n]?') == 'y':
+            raise ImportError()
+        _stash('pip install gittle3')
+        import gittle
         Gittle = gittle.Gittle
     ## end install modules
 else:
