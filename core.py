@@ -100,6 +100,7 @@ class StaSh(object):
     utility interfaces to running scripts.
     """
 
+    # boolean that if python3 is true, python2 is false.
     PY3 = six.PY3
 
     def __init__(self, debug=(), log_setting=None, no_cfgfile=False, no_rcfile=False, no_historyfile=False, command=None):
